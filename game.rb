@@ -72,12 +72,12 @@ class Board
 end
 
 puts '⚪ Choose name for Player 1'
-player1_name = gets.chomp
+player1_name = gets.chomp.strip
 player1_name = 'Player 1' if player1_name == ''
 
 puts '⚪ Choose name for Player 2'
 begin
-  player2_name = gets.chomp
+  player2_name = gets.chomp.strip
   player2_name = 'Player 2' if player2_name == ''
   raise 'Invalid name.' if player2_name == player1_name
 rescue
