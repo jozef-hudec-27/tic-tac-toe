@@ -50,7 +50,8 @@ describe Board do
       subject(:board_empty) { described_class.new }
 
       it 'updates the board' do
-        expect { board_empty.play_round(1, player1) }.to change {
+        valid_position = 1
+        expect { board_empty.play_round(valid_position, player1) }.to change {
                                                            board_empty.board
                                                          }.to([['❌', 2, 3], [4, 5, 6], [7, 8, 9]])
       end
@@ -60,7 +61,8 @@ describe Board do
       subject(:board_mid_game) { described_class.new([[1, 2, '🟢'], [4, '❌', 6], ['🟢', 8, 9]]) }
 
       it 'returns nil' do
-        expect(board_mid_game.play_round(3, player2)).to be_nil
+        invalid_position = 3
+        expect(board_mid_game.play_round(invalid_position, player2)).to be_nil
       end
 
       it 'does not update the board' do
