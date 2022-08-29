@@ -39,7 +39,11 @@ class Board
   end
 
   def play_round(position, player)
+    return unless (1..9).include? position
+
     row_col = get_row_and_col(position)
+    return unless (1..9).include? board[row_col[:row]][row_col[:col]]
+
     board[row_col[:row]][row_col[:col]] = player.symbol
   end
 

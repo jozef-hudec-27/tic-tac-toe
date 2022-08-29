@@ -42,6 +42,32 @@ describe Board do
         end
     end
 
+    describe '#play_round' do
+        let(:player1) { instance_double(Player, name: 'player1', symbol: '❌') }
+        let(:player2) { instance_double(Player, name: 'player2', symbol: '🟢') }
+        
+        context 'when the position is valid' do
+            subject(:board_empty) { described_class.new }
+
+            it 'updates the board' do
+                expect { board_empty.play_round(1, player1) }.to change { board_empty.board }.to([['❌', 2, 3], [4, 5, 6], [7, 8, 9]])
+            end
+        end
+
+        context 'when the position is not valid' do
+            subject(:board_mid_game) { described_class.new([[1, 2, '🟢'], [4, '❌', 6], ['🟢', 8, 9]]) }
+
+            it 'returns nil' do
+                expect(board_mid_game.play_round(3, player2)).to be_nil
+            end
+
+            it 'does not update the board' do
+                invalid_position = 30
+                expect { board_mid_game.play_round(invalid_position, player1) }.to_not change({ board_mid_game.board })
+            end
+        end
+    end
+
     describe '#tie?' do
         context 'when the board is full and there is no winner' do
             subject(:board_tie) { described_class.new([['❌', '🟢', '❌'], ['🟢', '❌', '🟢'], ['🟢', '❌', '🟢']]) }
