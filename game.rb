@@ -48,8 +48,10 @@ class Board
   end
 
   def occupied?(position)
+    return unless (1..9).include? position
+
     row_col = get_row_and_col(position)
-    %w[❌ 🟢].include?(board[row_col[:row]][row_col[:col]])
+    !(1..9).include?(board[row_col[:row]][row_col[:col]])
   end
 
   def print_board

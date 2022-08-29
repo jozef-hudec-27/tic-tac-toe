@@ -63,8 +63,32 @@ describe Board do
 
             it 'does not update the board' do
                 invalid_position = 30
-                expect { board_mid_game.play_round(invalid_position, player1) }.to_not change({ board_mid_game.board })
+                expect { board_mid_game.play_round(invalid_position, player1) }.to_not change { board_mid_game.board }
             end
+        end
+    end
+
+    describe '#occupied?' do
+        subject(:board) { described_class.new([[1, 2, '🟢'], [4, '❌', 6], ['🟢', 8, 9]]) }
+
+        context 'when the position is valid' do
+            it 'returns true if it is occupied' do
+                taken_position = 3
+                expect(board.occupied?(taken_position)).to be true
+            end
+
+            it 'returns false if it is not occupied' do
+                free_position = 1
+                expect(board.occupied?(free_position)).to be false
+            end
+        end
+
+        context 'when the position is not valid' do
+           it 'returns nil' do
+            invalid_position = 45
+
+            expect(board.occupied?(invalid_position)).to be_nil
+           end 
         end
     end
 
@@ -112,4 +136,3 @@ describe Board do
         end
     end
 end
-
