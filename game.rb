@@ -35,7 +35,7 @@ class Board
   end
 
   def tie?
-    !check_for_winner && board.flatten.select { |position| position.instance_of?(Integer) } == [] 
+    !check_for_winner && board.flatten.select { |position| position.instance_of?(Integer) } == []
   end
 
   def play_round(position, player)
